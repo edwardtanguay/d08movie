@@ -16,7 +16,7 @@ function App() {
 	const [favorites, setFavorites] = useState([]);
 
 	const getMovieRequest = async (searchValue) => {
-		const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=${
+		const url = `https://www.omdbapi.com/?s=${searchValue}&apikey=${
 			import.meta.env.VITE_API_KEY
 		}`;
 		try {
