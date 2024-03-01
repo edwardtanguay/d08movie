@@ -3,6 +3,6 @@
 - x make it responsive
 - x publish at vercel
 - x change http to https
-- .. refactor into components
+- x refactor into components
+- .. fix: don't allow one movie to added to favorites twice
 - add dark mode
-- fix: allow delete favorite

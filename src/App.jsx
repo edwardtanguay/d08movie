@@ -52,10 +52,13 @@ function App() {
 		saveToLocalStorage(newFavoriteList);
 	};
 
-	const addToFavorites = (value) => {
-		const newFavorites = [...favorites, value];
-		setFavorites(newFavorites);
-		saveToLocalStorage(newFavorites);
+	const addToFavorites = (movie) => {
+		const foundMovie = favorites.find((m) => m.imdbID === movie.imdbID);
+		if (!foundMovie) {
+			const newFavorites = [...favorites, movie];
+			setFavorites(newFavorites);
+			saveToLocalStorage(newFavorites);
+		}
 	};
 
 	return (
@@ -68,7 +71,10 @@ function App() {
 					setSearchValue={setSearchValue}
 				/>
 				<MovieList movies={movies} addToFavorites={addToFavorites} />
-				<FavoriteList favorites={favorites} removeFavoriteMovie={removeFavoriteMovie} />
+				<FavoriteList
+					favorites={favorites}
+					removeFavoriteMovie={removeFavoriteMovie}
+				/>
 			</Container>
 		</>
 	);
