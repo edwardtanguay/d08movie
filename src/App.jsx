@@ -70,7 +70,7 @@ function App() {
 					searchValue={searchValue}
 					setSearchValue={setSearchValue}
 				/>
-				<MovieList movies={movies} addToFavorites={addToFavorites} />
+				<MovieList movies={movies} addToFavorites={addToFavorites} favorites={favorites} removeFavoriteMovie={removeFavoriteMovie} />
 				<FavoriteList
 					favorites={favorites}
 					removeFavoriteMovie={removeFavoriteMovie}

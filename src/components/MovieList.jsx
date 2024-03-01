@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
 import Card from "react-bootstrap/Card";
 import { RiHeartAddLine } from "react-icons/ri";
+import { TbHeartMinus } from "react-icons/tb";
 
 export const MovieList = (props) => {
-	const { movies, addToFavorites } = props;
+	const { movies, addToFavorites, favorites, removeFavoriteMovie } = props;
 	return (
 		<div className="row nowrap ">
 			{movies.map((movie) => {
@@ -18,10 +19,19 @@ export const MovieList = (props) => {
 							<Card.Title>
 								{movie.Title} ({movie.Year})
 							</Card.Title>
-							<RiHeartAddLine
-								onClick={() => addToFavorites(movie)}
-								className="like-icon"
-							/>
+							{favorites.some(
+								(favorite) => favorite.imdbID == movie.imdbID
+							) ? (
+								<TbHeartMinus
+									className="like-icon"
+									onClick={() => removeFavoriteMovie(movie)}
+								/>
+							) : (
+								<RiHeartAddLine
+									onClick={() => addToFavorites(movie)}
+									className="like-icon"
+								/>
+							)}
 						</Card.Body>
 					</Card>
 				);
