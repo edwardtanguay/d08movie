@@ -18,20 +18,20 @@
   margin: 1rem;
 }
 
-.container > .nowrap{
+.container>.nowrap {
   flex-wrap: nowrap;
-  overflow-x:auto;
+  overflow-x: auto;
 }
 
-.like-icon{
- color: var(--text-red);
- font-size: 2rem;
- cursor: pointer;
- transition: transform 0.5s;
+.like-icon {
+  color: var(--text-red);
+  font-size: 2rem;
+  cursor: pointer;
+  transition: transform 0.5s;
 
 }
 
-.like-icon:hover{
+.like-icon:hover {
   transform: scale(1.2);
 }
 

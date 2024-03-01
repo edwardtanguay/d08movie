@@ -1,6 +1,7 @@
 - x clone movie app local
-- .. analyze and refactor
+- .. analyze 
 - make it responsive
 - publish at vercel
+- refactor into components
 - add dark mode
 - fix: allow delete favorite
