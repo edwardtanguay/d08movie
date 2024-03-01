@@ -1,8 +1,8 @@
 - x clone movie app local
 - x analyze 
 - x make it responsive
-- .. publish at vercel
-- change http to https
-- refactor into components
+- x publish at vercel
+- x change http to https
+- .. refactor into components
 - add dark mode
 - fix: allow delete favorite

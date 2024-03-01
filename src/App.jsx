@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { Col, Row, Image } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
-import Img from "./assets/image/the-movie-verse.png";
 import { TbHeartMinus } from "react-icons/tb";
+import { HeroSection } from "./components/HeroSection";
 
 // import avengersData from './moviesData';
 
@@ -81,20 +80,7 @@ function App() {
 				</Container>
 			</Navbar>
 			<Container>
-				{/* Hero section 1 */}
-				<Col className="d-flex gap-4 pt-5 align-items-center ">
-					<Row>
-						<h1 className="hero-text">
-							Welcome to the Movie Verse
-						</h1>
-						<p className="hero-description">
-							Find and save your favorite movies
-						</p>
-					</Row>
-					<Row>
-						<Image src={Img} alt="Hero image" />
-					</Row>
-				</Col>
+			<HeroSection/>
 
 				{/* Hero section 2 */}
 				<div className="row d-flex align-items-center mt-4 ">
