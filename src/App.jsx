@@ -3,9 +3,9 @@ import Container from "react-bootstrap/Container";
 import { TbHeartMinus } from "react-icons/tb";
 import { HeroSection } from "./components/HeroSection";
 import Card from "react-bootstrap/Card";
-import { RiHeartAddLine } from "react-icons/ri";
 import { NavBar } from "./components/NavBar";
 import { SearchArea } from "./components/SearchArea";
+import { MovieList } from "./components/MovieList";
 
 function App() {
 	const [movies, setMovies] = useState([]);
@@ -65,29 +65,7 @@ function App() {
 			<Container>
 				<HeroSection />
 				<SearchArea searchValue={searchValue} setSearchValue={setSearchValue} />
-
-				<div className="row nowrap ">
-					{movies.map((movie) => {
-						return (
-							<Card
-								className="pt-3 m-3"
-								key={movie.imdbID}
-								style={{ width: "18rem" }}
-							>
-								<Card.Img variant="top" src={movie.Poster} />
-								<Card.Body className="d-flex align-items-center justify-content-between">
-									<Card.Title>
-										{movie.Title} ({movie.Year})
-									</Card.Title>
-									<RiHeartAddLine
-										onClick={() => addToFavorites(movie)}
-										className="like-icon"
-									/>
-								</Card.Body>
-							</Card>
-						);
-					})}
-				</div>
+				<MovieList movies={movies} addToFavorites={addToFavorites} />
 
 				{/* Favorite list section */}
 				<div className="row d-flex align-items-center mt-4 ">
