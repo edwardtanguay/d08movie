@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
-import Navbar from "react-bootstrap/Navbar";
 import { TbHeartMinus } from "react-icons/tb";
 import { HeroSection } from "./components/HeroSection";
-
-// import avengersData from './moviesData';
-
 import Card from "react-bootstrap/Card";
 import { RiHeartAddLine } from "react-icons/ri";
+import { NavBar } from "./components/NavBar";
+import { SearchArea } from "./components/SearchArea";
 
 function App() {
 	const [movies, setMovies] = useState([]);
@@ -21,8 +19,6 @@ function App() {
 		try {
 			const response = await fetch(url);
 			const responseJson = await response.json();
-			// console.log(responseJson);
-
 			if (responseJson.Search) {
 				setMovies(responseJson.Search);
 			}
@@ -31,15 +27,11 @@ function App() {
 		}
 	};
 
-	// getMovieRequest('alvin')
-	// console.log(avengersData);
-
 	useEffect(() => {
 		getMovieRequest(searchValue);
 	}, [searchValue]);
 
 	useEffect(() => {
-		// LADEN aus localStorage unter der name "favorite-movies" und in favoriteMovies speichern
 		const favoriteMovies = JSON.parse(
 			localStorage.getItem("favorite-movies")
 		);
@@ -49,23 +41,19 @@ function App() {
 		}
 	}, []);
 
-	// SPICHERN in localStorage unter der name "favorite-movies"
 	const saveToLocalStorage = (items) => {
 		localStorage.setItem("favorite-movies", JSON.stringify(items));
 	};
 
-	// FAVORITEN entfernen mit filter methode
 	const removeFavoriteMovie = (movie) => {
 		const newFavoriteList = favorites.filter(
 			(favourite) => favourite.imdbID !== movie.imdbID
 		);
-		// alter Liste überschreiben
 		setFavorites(newFavoriteList);
 		saveToLocalStorage(newFavoriteList);
 	};
 
 	const addToFavorites = (value) => {
-		// console.log(value);
 		const newFavorites = [...favorites, value];
 		setFavorites(newFavorites);
 		saveToLocalStorage(newFavorites);
@@ -73,30 +61,10 @@ function App() {
 
 	return (
 		<>
-			{/* Navbar */}
-			<Navbar expand="lg" className="">
-				<Container>
-					<Navbar.Brand href="#">🌐 Movie-Verve</Navbar.Brand>
-				</Container>
-			</Navbar>
+			<NavBar />
 			<Container>
-			<HeroSection/>
-
-				{/* Hero section 2 */}
-				<div className="row d-flex align-items-center mt-4 ">
-					<div className="col">
-						<h2>MOVIE LIST:</h2>
-					</div>
-					<div className="col">
-						<input
-							value={searchValue}
-							onChange={(e) => setSearchValue(e.target.value)}
-							type="text"
-							placeholder="Search a movie..."
-							className="form-control"
-						/>
-					</div>
-				</div>
+				<HeroSection />
+				<SearchArea searchValue={searchValue} setSearchValue={setSearchValue} />
 
 				<div className="row nowrap ">
 					{movies.map((movie) => {
