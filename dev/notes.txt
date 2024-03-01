@@ -1,6 +1,6 @@
 - x clone movie app local
-- .. analyze 
-- make it responsive
+- x analyze 
+- .. make it responsive
 - publish at vercel
 - refactor into components
 - add dark mode
