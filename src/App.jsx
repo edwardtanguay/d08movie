@@ -1,16 +1,29 @@
 import { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
-import { TbHeartMinus } from "react-icons/tb";
 import { HeroSection } from "./components/HeroSection";
-import Card from "react-bootstrap/Card";
 import { NavBar } from "./components/NavBar";
 import { SearchArea } from "./components/SearchArea";
 import { MovieList } from "./components/MovieList";
+import { FavoriteList } from "./components/FavoriteList";
 
 function App() {
 	const [movies, setMovies] = useState([]);
 	const [searchValue, setSearchValue] = useState("");
 	const [favorites, setFavorites] = useState([]);
+
+	useEffect(() => {
+		getMovieRequest(searchValue);
+	}, [searchValue]);
+
+	useEffect(() => {
+		const favoriteMovies = JSON.parse(
+			localStorage.getItem("favorite-movies")
+		);
+
+		if (favoriteMovies) {
+			setFavorites(favoriteMovies);
+		}
+	}, []);
 
 	const getMovieRequest = async (searchValue) => {
 		const url = `https://www.omdbapi.com/?s=${searchValue}&apikey=${
@@ -26,20 +39,6 @@ function App() {
 			console.error(error);
 		}
 	};
-
-	useEffect(() => {
-		getMovieRequest(searchValue);
-	}, [searchValue]);
-
-	useEffect(() => {
-		const favoriteMovies = JSON.parse(
-			localStorage.getItem("favorite-movies")
-		);
-
-		if (favoriteMovies) {
-			setFavorites(favoriteMovies);
-		}
-	}, []);
 
 	const saveToLocalStorage = (items) => {
 		localStorage.setItem("favorite-movies", JSON.stringify(items));
@@ -64,40 +63,12 @@ function App() {
 			<NavBar />
 			<Container>
 				<HeroSection />
-				<SearchArea searchValue={searchValue} setSearchValue={setSearchValue} />
+				<SearchArea
+					searchValue={searchValue}
+					setSearchValue={setSearchValue}
+				/>
 				<MovieList movies={movies} addToFavorites={addToFavorites} />
-
-				{/* Favorite list section */}
-				<div className="row d-flex align-items-center mt-4 ">
-					<div className="col">
-						<h2>Favorites Movies:</h2>
-					</div>
-				</div>
-				<div className="row nowrap ">
-					{favorites.map((movie) => {
-						return (
-							<Card
-								className="pt-3 m-3"
-								key={movie.imdbID}
-								style={{ width: "18rem" }}
-							>
-								<Card.Img variant="top" src={movie.Poster} />
-								<Card.Body className="d-flex align-items-center justify-content-between">
-									<Card.Title>
-										{" "}
-										{movie.Title} ({movie.Year})
-									</Card.Title>
-									<TbHeartMinus
-										className="like-icon"
-										onClick={() =>
-											removeFavoriteMovie(movie)
-										}
-									/>
-								</Card.Body>
-							</Card>
-						);
-					})}
-				</div>
+				<FavoriteList favorites={favorites} removeFavoriteMovie={removeFavoriteMovie} />
 			</Container>
 		</>
 	);
